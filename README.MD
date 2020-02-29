@@ -1,4 +1,11 @@
-# FFmpeg-CYL-Analyzer
+# FFmpeg-QuQi-Analyzer
+
+<img src="doc/cylanalyzer.png" width="500" height="400" >
+
+--------------------------------
+
+LICENSE: <a href="LICENSE.md">"Anti 996" License Version 1.0 (Draft)</a>
+
 ---------------------------------
 ### 1. Get QP:
 `AVCodecContext *avctx;`
