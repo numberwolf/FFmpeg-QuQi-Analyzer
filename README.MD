@@ -4,8 +4,9 @@
 
 --------------------------------
 
-LICENSE: <a href="LICENSE.md">"Anti 996" License Version 1.0 (Draft)</a>
-
+LICENSE: 
+- <a href="LICENSE.md">"Anti 996" License Version 1.0 (Draft)</a>
+- <a href="FFMPEG_LICENSE.md">FFmpeg</a>
 ---------------------------------
 ### 1. Get QP:
 `AVCodecContext *avctx;`
