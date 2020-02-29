@@ -8,8 +8,12 @@ LICENSE:
 - <a href="LICENSE.md">LICENSE(1) "Anti 996" License Version 1.0 (Draft)</a>
 - <a href="FFMPEG_LICENSE.md">LICENSE(2)</a>
 ---------------------------------
+
+## Pre
+`AVCodecContext *avctx = ... ;`
+
 ### 1. Get QP:
-`AVCodecContext *avctx;`
+
 ```c++
 // analyzer open
 avctx->cyl_analyzer_state_switch(avctx,1);
