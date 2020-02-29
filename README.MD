@@ -1,6 +1,6 @@
 # FFmpeg-QuQi-Analyzer
 
-<img src="doc/cylanalyzer.png" width="500" height="400" >
+<img src="doc/cylanalyzer@400x400.png" width="500" height="400" >
 
 --------------------------------
 

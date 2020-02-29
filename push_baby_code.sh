@@ -20,7 +20,7 @@ defaultCommitLen=${#defaultCommit[@]}
 # Input
 commitVal=${1:-""}
 
-if [ -z $commit_val ]; then
+if [[ -z "${commitVal}" || "${commitVal}" == "" ]]; then
     randIndex=`rand 1 ${defaultCommitLen}`
     commitVal=${defaultCommit[$randIndex]} # `date +"%Y/%m/%d %H:%M:%S"`
 fi
