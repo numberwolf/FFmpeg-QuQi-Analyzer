@@ -74,30 +74,33 @@ printf("\n");
 <br>
 
 ### 3. Check MB Type   
-- #### <b>include : libavcodec/cyl2analyzer.h</b>   
-> ##### (1) func
-> IS_INTRA4x4(a)
-> IS_INTRA16x16(a)
-> IS_PCM(a)
-> IS_INTRA(a)
-> IS_INTER(a)
-> IS_SKIP(a)
-> IS_INTRA_PCM(a)
-> IS_INTERLACED(a)
-> IS_DIRECT(a)
-> IS_GMC(a)
-> IS_16X16(a)
-> IS_16X8(a)
-> IS_8X16(a)
-> IS_8X8(a)
-> IS_SUB_8X8(a)
-> IS_SUB_8X4(a)
-> IS_SUB_4X8(a)
-> IS_SUB_4X4(a)
-> IS_ACPRED(a)
-> IS_QUANT(a)
+#### include : `libavcodec/cyl2analyzer.h `  
+(1) Func
+> @Param    CYLCodecAnalyzerLinkListNode->mb_item_type            
+> @return   bool     
+>         
+> IS_INTRA4x4(a)      
+> IS_INTRA16x16(a)    
+> IS_PCM(a)    
+> IS_INTRA(a)    
+> IS_INTER(a)    
+> IS_SKIP(a)    
+> IS_INTRA_PCM(a)    
+> IS_INTERLACED(a)    
+> IS_DIRECT(a)    
+> IS_GMC(a)    
+> IS_16X16(a)    
+> IS_16X8(a)    
+> IS_8X16(a)    
+> IS_8X8(a)    
+> IS_SUB_8X8(a)    
+> IS_SUB_8X4(a)    
+> IS_SUB_4X8(a)    
+> IS_SUB_4X4(a)    
+> IS_ACPRED(a)    
+> IS_QUANT(a)    
 
-> ##### (2) or strcmp
+(2) OR strcmp
 > CYL_ANALYZE_MB_TYPE_IS_INTRA4x4     
 > CYL_ANALYZE_MB_TYPE_IS_INTRA16x16   
 > CYL_ANALYZE_MB_TYPE_IS_PCM          
