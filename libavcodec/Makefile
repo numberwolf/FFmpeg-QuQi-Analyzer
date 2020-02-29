@@ -1,6 +1,7 @@
 NAME = avcodec
 DESC = FFmpeg codec library
-
+# changyanlong
+# add cyl2analyzer.h
 HEADERS = ac3_parser.h                                                  \
           adts_parser.h                                                 \
           avcodec.h                                                     \
@@ -19,6 +20,8 @@ HEADERS = ac3_parser.h                                                  \
           videotoolbox.h                                                \
           vorbis_parser.h                                               \
           xvmc.h                                                        \
+          mpegutils.h													\
+          cyl2analyzer.h                                                \
 
 OBJS = ac3_parser.o                                                     \
        adts_parser.o                                                    \

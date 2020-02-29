@@ -1525,7 +1525,7 @@ enum AVFieldOrder {
  */
 typedef struct CYLCodecAnalyzerLinkListNode {
 //    signed char *qp_info;
-//    uint32_t *mb_type;
+//    uint32_t *mb_type;cyl2analyzer.h
     int mb_index;
     signed char qp_item;
     uint32_t mb_item_type;

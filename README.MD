@@ -1,6 +1,6 @@
 # FFmpeg-QuQi-Analyzer
 
-<img src="doc/cylanalyzer@400x400.png" width="500" height="400" >
+<img src="doc_quqi/cylanalyzer@400x400.png" width="500" height="400" >
 
 --------------------------------
 
@@ -38,8 +38,9 @@ ptr = NULL;
 printf("\n");
 
 ```
+<br>
 
-2. Get Macro Block Type
+### 2. Get Macro Block Type
 ```c++
 // analyzer open
 avctx->cyl_analyzer_state_switch(avctx,1);
@@ -67,6 +68,75 @@ while (ptr != NULL) {
 }
 ptr = NULL;
 printf("\n");
+
+```
+<br>
+
+### 3. Check MB Type   
+- #### <b>include : libavcodec/cyl2analyzer.h</b>   
+> ##### (1) func
+> IS_INTRA4x4(a)
+> IS_INTRA16x16(a)
+> IS_PCM(a)
+> IS_INTRA(a)
+> IS_INTER(a)
+> IS_SKIP(a)
+> IS_INTRA_PCM(a)
+> IS_INTERLACED(a)
+> IS_DIRECT(a)
+> IS_GMC(a)
+> IS_16X16(a)
+> IS_16X8(a)
+> IS_8X16(a)
+> IS_8X8(a)
+> IS_SUB_8X8(a)
+> IS_SUB_8X4(a)
+> IS_SUB_4X8(a)
+> IS_SUB_4X4(a)
+> IS_ACPRED(a)
+> IS_QUANT(a)
+
+> ##### (2) or strcmp
+> CYL_ANALYZE_MB_TYPE_IS_INTRA4x4     
+> CYL_ANALYZE_MB_TYPE_IS_INTRA16x16   
+> CYL_ANALYZE_MB_TYPE_IS_PCM          
+> CYL_ANALYZE_MB_TYPE_IS_INTRA       
+> CYL_ANALYZE_MB_TYPE_IS_INTER      
+> CYL_ANALYZE_MB_TYPE_IS_SKIP       
+> CYL_ANALYZE_MB_TYPE_IS_INTRA_PCM  
+> CYL_ANALYZE_MB_TYPE_IS_INTERLACED
+> CYL_ANALYZE_MB_TYPE_IS_DIRECT    
+> CYL_ANALYZE_MB_TYPE_IS_GMC       
+> CYL_ANALYZE_MB_TYPE_IS_16X16     
+> CYL_ANALYZE_MB_TYPE_IS_16X8       
+> CYL_ANALYZE_MB_TYPE_IS_8X16       
+> CYL_ANALYZE_MB_TYPE_IS_8X8        
+> CYL_ANALYZE_MB_TYPE_IS_SUB_8X8     
+> CYL_ANALYZE_MB_TYPE_IS_SUB_8X4     
+> CYL_ANALYZE_MB_TYPE_IS_SUB_4X8    
+> CYL_ANALYZE_MB_TYPE_IS_SUB_4X4   
+> CYL_ANALYZE_MB_TYPE_IS_ACPRED      
+> CYL_ANALYZE_MB_TYPE_IS_QUANT       
+> CYL_ANALYZE_MB_TYPE_UnKnow         
+>
+
+<br>
+
+- #### Code
+```c++
+#include <libavcodec/cyl2analyzer.h>
+
+...etc
+
+// (1)
+if (IS_INTER(ptr->mb_item_type)) {
+    etc...
+}
+
+// (2)
+if (strcmp(ptr->mb_desc , CYL_ANALYZE_MB_TYPE_IS_INTER)) {
+    etc...
+}
 
 ```
 
