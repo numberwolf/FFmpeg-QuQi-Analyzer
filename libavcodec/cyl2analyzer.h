@@ -3,8 +3,8 @@
 // changyanlong
 //
 
-#ifndef FFMPEG_N4_1_3_CYL2ANALYZER_H
-#define FFMPEG_N4_1_3_CYL2ANALYZER_H
+#ifndef QUQI_FFMPEG_N4_1_3_CYL2ANALYZER_H
+#define QUQI_FFMPEG_N4_1_3_CYL2ANALYZER_H
 
 #include "mpegutils.h"
 
