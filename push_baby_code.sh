@@ -8,12 +8,12 @@ function rand() {
 }
 
 defaultCommit=(
-"here's no commit desc, because the author was so lazy"
-"hi"
-"Honda!!!"
-"dream car: PorscheGt3RS!!"
-"what time?"
-"two monkey on the tree~~~ coding bugs every day~~ so happy so happy~~"
+"Random: here's no commit desc, because the author was so lazy"
+"Random: hi"
+"Random: Honda!!!"
+"Random: dream car: PorscheGt3RS"
+"Random: what time?"
+"Random: two monkey on the tree~~~ coding bugs every day~~ so happy so happy~~"
 )
 defaultCommitLen=${#defaultCommit[@]}
 
