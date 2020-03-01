@@ -2,6 +2,9 @@
 
 <img src="doc_quqi/cylanalyzer@400x400.png" width="500" height="400" >
 
+<br><br>
+- 新需求可以提在`ISSUE`里
+
 --------------------------------
 
 LICENSE: 

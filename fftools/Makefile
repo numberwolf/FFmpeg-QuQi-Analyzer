@@ -17,6 +17,10 @@ OBJS-ffmpeg-$(CONFIG_VDA)          += fftools/ffmpeg_videotoolbox.o
 endif
 OBJS-ffmpeg-$(CONFIG_VIDEOTOOLBOX) += fftools/ffmpeg_videotoolbox.o
 
+#
+# QUQI
+# changyanlong + common_define.o
+#
 define DOFFTOOL
 OBJS-$(1) += fftools/cmdutils.o fftools/common_define.o fftools/$(1).o $(OBJS-$(1)-yes)
 $(1)$(PROGSSUF)_g$(EXESUF): $$(OBJS-$(1))
