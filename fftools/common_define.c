@@ -5,8 +5,8 @@
 
 void cyl_fftools_print_author_info(void) {
     printf("- \n");
-    printf("- GitHub:https://github.com/numberwolf/ffmpeg-cyl-analyzer\n");
-    printf("- cyl-analyzer\n");
+    printf("- GitHub:https://github.com/numberwolf/ffmpeg-quqi-analyzer\n");
+    printf("- QUQI-Analyzer\n");
     printf("- 此版本由 小老虎(Numberwolf/CYL)开发发起开发\n");
     printf("- 邮箱：porschegt23@foxmail.com\n");
     printf("- 提供FFmpeg获取视频的 Macro Block/QP/Motion Vector/...等编码分析信息的外显接口\n");
