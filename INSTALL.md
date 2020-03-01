@@ -1,10 +1,4 @@
 #Install:
-## 1
-```
-bash build.sh all
-```
-
-## or 2
 1. Type `./configure` to create the configuration. A list of configure
 options is printed by running `configure --help`.
 
