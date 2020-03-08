@@ -710,6 +710,8 @@ FF_ENABLE_DEPRECATION_WARNINGS
             s->streams[i]->codec->cyl_analyze_open  = -1;
             s->streams[i]->codec->cyl_analyzer_head = NULL;
         }
+        s->streams[i]->codec->ref_index[0] = NULL;
+        s->streams[i]->codec->ref_index[1] = NULL;
         s->streams[i]->codec->cyl_test                  = cyl_test;
         s->streams[i]->codec->cyl_analyzer_state_switch = cyl_analyzer_state_switch;
     }

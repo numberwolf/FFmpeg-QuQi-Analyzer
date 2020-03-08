@@ -1908,6 +1908,8 @@ static av_always_inline void decode_cabac_luma_residual(const H264Context *h, H2
 }
 
 /**
+ * changyanlong
+ * 熵解码
  * Decode a macroblock.
  * @return 0 if OK, ER_AC_ERROR / ER_DC_ERROR / ER_MV_ERROR if an error is noticed
  */

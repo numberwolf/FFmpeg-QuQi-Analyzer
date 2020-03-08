@@ -125,6 +125,10 @@ typedef struct MMCO {
     int long_arg;       ///< index, pic_num, or num long refs depending on opcode
 } MMCO;
 
+/**
+ * changyanlong
+ * motion vector/mb_type/qp
+ */
 typedef struct H264Picture {
     AVFrame *f;
     ThreadFrame tf;

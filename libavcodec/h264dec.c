@@ -97,6 +97,10 @@ static void h264_er_decode_mb(void *opaque, int ref, int mv_dir, int mv_type,
                    pack16to32((*mv)[0][0][0], (*mv)[0][0][1]), 4);
     sl->mb_mbaff =
     sl->mb_field_decoding_flag = 0;
+    /**
+     * changyanlong
+     * 拿到正确的DCT系数->完成一步反Hadamard变换->ff_h264_hl_decode_mb => sl->mb却被清零了（这是为了下一个宏块正确解码而必须做的？反正我把sl->mb保留了之后，后面的宏块解码就出错了）
+     */
     ff_h264_hl_decode_mb(h, &h->slice_ctx[0]);
 }
 
@@ -598,6 +602,13 @@ static void debug_green_metadata(const H264SEIGreenMetaData *gm, void *logctx)
     }
 }
 
+/**
+ * changyanlong  这里看一下
+ * @param h
+ * @param buf
+ * @param buf_size
+ * @return
+ */
 static int decode_nal_units(H264Context *h, const uint8_t *buf, int buf_size)
 {
     AVCodecContext *const avctx = h->avctx;
@@ -1065,7 +1076,9 @@ static int h264_decode_frame(AVCodecContext *avctx, void *data,
 
                 //printf("[CYL DEBUG : libavcodec/h264dec.c QP data:]\n");
 
+//                printf("[DEBUG] h->slice_ctx[0].mb_xy :");
                 for (int ind = 0; ind < h->mb_num; ind++) {
+//                    printf("%d ",h->slice_ctx[0].mb_xy);
 
                     uint32_t mb_type_item   = h->cur_pic_ptr->mb_type[ind];
                     signed char qp_item     = h->cur_pic_ptr->qscale_table[ind];
@@ -1193,7 +1206,6 @@ static int h264_decode_frame(AVCodecContext *avctx, void *data,
 //                ptr1 = NULL;
 //                printf("\n");
 
-//                printf("\n");
             } // end if analyze
         }
     }

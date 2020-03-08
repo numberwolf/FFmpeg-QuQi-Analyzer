@@ -3338,6 +3338,14 @@ typedef struct AVCodecContext {
      */
     int cyl_analyze_open;
     CYLCodecAnalyzerLinkListNode *cyl_analyzer_head;
+
+    /**参考帧列表
+     * motion reference frame index
+     * the order in which these are stored can depend on the codec.
+     * - encoding: Set by user.
+     * - decoding: Set by libavcodec.
+     */
+    int8_t *ref_index[2];
 //    signed char *my_qp;
 //    uint32_t* mb_type;
 
