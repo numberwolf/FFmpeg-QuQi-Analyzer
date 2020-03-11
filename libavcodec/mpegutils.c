@@ -29,11 +29,37 @@
 #include "avcodec.h"
 #include "mpegutils.h"
 
+/**
+ * changyanlong
+ * 初始化矢量容器
+ * @param mb
+ * @param mb_type
+ * @param dst_x
+ * @param dst_y
+ * @param motion_x
+ * @param motion_y
+ * @param motion_scale
+ * @param direction
+ * @return
+ */
 static int add_mb(AVMotionVector *mb, uint32_t mb_type,
                   int dst_x, int dst_y,
                   int motion_x, int motion_y, int motion_scale,
                   int direction)
 {
+    /** changyanlong
+     * 新增逻辑 判断是否无位移
+     * check no mv info and remove it
+     */
+    int src_x = dst_x + motion_x / motion_scale;
+    int src_y = dst_y + motion_y / motion_scale;
+
+    if (src_x == dst_x && src_y == dst_y) {
+//        printf("[mpegutils.c add_mb(xxx) Filter none-move mv data]\n");
+        return 0;
+    }
+
+    // macro block size 宏块尺寸
     mb->w = IS_8X8(mb_type) || IS_8X16(mb_type) ? 8 : 16;
     mb->h = IS_8X8(mb_type) || IS_16X8(mb_type) ? 8 : 16;
     mb->motion_x = motion_x;
@@ -41,8 +67,10 @@ static int add_mb(AVMotionVector *mb, uint32_t mb_type,
     mb->motion_scale = motion_scale;
     mb->dst_x = dst_x;
     mb->dst_y = dst_y;
-    mb->src_x = dst_x + motion_x / motion_scale;
-    mb->src_y = dst_y + motion_y / motion_scale;
+//    mb->src_x = dst_x + motion_x / motion_scale;
+//    mb->src_y = dst_y + motion_y / motion_scale;
+    mb->src_x = src_x;
+    mb->src_y = src_y;
     mb->source = direction ? 1 : -1;
     mb->flags = 0; // XXX: does mb_type contain extra information that could be exported here?
     return 1;
@@ -198,6 +226,10 @@ void ff_print_debug_info2(AVCodecContext *avctx, AVFrame *pict, uint8_t *mbskip_
 
         av_log(avctx, AV_LOG_DEBUG, "New frame, type: %c\n",
                av_get_picture_type_char(pict->pict_type));
+        /**
+         * changyanlong
+         * 对宏块类型的判断 macro type check and printf
+         */
         for (y = 0; y < mb_height; y++) {
             for (x = 0; x < mb_width; x++) {
                 if (avctx->debug & FF_DEBUG_SKIP) {

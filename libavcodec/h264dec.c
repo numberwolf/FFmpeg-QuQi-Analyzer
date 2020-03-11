@@ -1058,6 +1058,26 @@ static int h264_decode_frame(AVCodecContext *avctx, void *data,
              */
             printf("avctx->cyl_analyze_open = %d\n",avctx->cyl_analyze_open);
             if (avctx->cyl_analyze_open == 1) {
+                /**
+                 * h -> H264SliceContext *slice_ctx;
+                 * changyanlong
+                 * 1. motion vector
+                 */
+//                const int mb_width  = (avctx->width + 15) / 16;
+//                const int mb_height = (avctx->height + 15) / 16;
+//                const int mb_stride = mb_width + 1;
+//
+//                const int mv_sample_log2 = 4 - pict->motion_subsample_log2;
+//                const int mv_stride = (mb_width << mv_sample_log2) + (ctx->codec_id == CODEC_ID_H264 ? 0 : 1);
+//                const int quarter_sample = (ctx->flags & CODEC_FLAG_QPEL) != 0;
+//                const int shift = 1 + quarter_sample;
+
+
+                /**
+                 * changyanlong
+                 * 1. macro block type
+                 * 2. qp
+                 */
                 if (avctx->cyl_analyzer_head != NULL) {
                     cyl_analyzer_release_link_list_node(avctx->cyl_analyzer_head);
                 }
@@ -1076,10 +1096,15 @@ static int h264_decode_frame(AVCodecContext *avctx, void *data,
 
                 //printf("[CYL DEBUG : libavcodec/h264dec.c QP data:]\n");
 
-//                printf("[DEBUG] h->slice_ctx[0].mb_xy :");
+                printf("[DEBUG] h->slice_ctx->mb_xy :%d\n", h->slice_ctx->mb_xy);
+
                 for (int ind = 0; ind < h->mb_num; ind++) {
 //                    printf("%d ",h->slice_ctx[0].mb_xy);
 
+                    /*
+                     * H264Context => h
+                     * H264Picture => h->cur_pic_ptr
+                     */
                     uint32_t mb_type_item   = h->cur_pic_ptr->mb_type[ind];
                     signed char qp_item     = h->cur_pic_ptr->qscale_table[ind];
 

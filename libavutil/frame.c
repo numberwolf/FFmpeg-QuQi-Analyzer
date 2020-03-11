@@ -731,14 +731,30 @@ AVFrameSideData *av_frame_new_side_data(AVFrame *frame,
     return ret;
 }
 
+/**
+ * changyanlong
+ * @param frame
+ * @param type
+ * @return
+ */
 AVFrameSideData *av_frame_get_side_data(const AVFrame *frame,
                                         enum AVFrameSideDataType type)
 {
     int i;
 
+    // 遍历avframe内部每个side_data 直到取到需要的类型
+    /* changyanlong
+     * 补充:
+     * AV_FRAME_DATA_MOTION_VECTORS 为运动矢量的
+     */
     for (i = 0; i < frame->nb_side_data; i++) {
-        if (frame->side_data[i]->type == type)
+        if (frame->side_data[i]->type == type) {
+            // 预处理
+            if (type == AV_FRAME_DATA_MOTION_VECTORS) {
+                // @TODO 可能要在这里处理 过滤掉不需要的运动矢量
+            }
             return frame->side_data[i];
+        }
     }
     return NULL;
 }
