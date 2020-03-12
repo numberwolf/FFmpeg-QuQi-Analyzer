@@ -14,10 +14,10 @@ LICENSE:
 ## Pre
 `AVCodecContext *avctx = ... ;`
 
-### 1. 获取QP数据:
+### 1. Get QP:
 
 ```c++
-// analyzer open 开启分析器 （必须）
+// analyzer open
 avctx->cyl_analyzer_state_switch(avctx,1);
 
 ...etc
@@ -47,9 +47,9 @@ printf("\n");
 ```
 <br>
 
-### 2. 获取宏块类型
+### 2. Get Macro Block Type
 ```c++
-// analyzer open 开启分析器 （必须）
+// analyzer open
 avctx->cyl_analyzer_state_switch(avctx,1);
 
 ...etc
@@ -79,7 +79,7 @@ printf("\n");
 ```
 <br>
 
-### 3. 判断宏块类型 (Macro Type)
+### 3. Check MB Type   
 #### include : `libavcodec/cyl2analyzer.h `  
 (1) Func
 > @Param    CYLCodecAnalyzerLinkListNode->mb_item_type            
@@ -150,10 +150,7 @@ if (strcmp(ptr->mb_desc , CYL_ANALYZE_MB_TYPE_IS_INTER)) {
 
 ```
 
-### 4. 获取运动矢量 (Motion Vector)
-##### 优化
-- 获取MV性能提升87%
-
+### 4. Get Motion Vector
 ```c++
 AVDictionary *options = NULL;
 av_dict_set(&options, "flags2", "+export_mvs", 0);

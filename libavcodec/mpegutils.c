@@ -55,9 +55,10 @@ static int add_mb(AVMotionVector *mb, uint32_t mb_type,
     int src_y = dst_y + motion_y / motion_scale;
 
     if (src_x == dst_x && src_y == dst_y) {
-//        printf("[mpegutils.c add_mb(xxx) Filter none-move mv data]\n");
+//        printf("[code 100001 mpegutils.c add_mb(xxx) Filter none-move mv data]\n");
         return 0;
     }
+//    printf("[code 100002 mpegutils.c add_mb(xxx) Filter allow add]\n");
 
     // macro block size 宏块尺寸
     mb->w = IS_8X8(mb_type) || IS_8X16(mb_type) ? 8 : 16;
