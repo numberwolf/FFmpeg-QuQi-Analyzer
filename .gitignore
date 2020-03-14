@@ -39,3 +39,6 @@ cmake-build-debug
 /lcov/
 /src
 /mapfile
+FATE_SAMPLES/
+*.crc
+*.mp4
