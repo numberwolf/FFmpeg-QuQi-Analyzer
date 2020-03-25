@@ -143,6 +143,12 @@ static void avformat_get_context_defaults(AVFormatContext *s)
 
 AVFormatContext *avformat_alloc_context(void)
 {
+    printf("- \n");
+    printf("- https://github.com/numberwolf/ffmpeg-quqi-analyzer\n");
+    printf("- QUQI-Analyzer\n");
+    printf("- porschegt23@foxmail.com\n");
+    printf("- \n");
+
     AVFormatContext *ic;
     ic = av_malloc(sizeof(AVFormatContext));
     if (!ic) return ic;
