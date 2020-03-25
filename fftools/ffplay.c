@@ -3571,6 +3571,11 @@ static int opt_codec(void *optctx, const char *opt, const char *arg)
 
 static int dummy;
 
+/**
+ * quqi
+ * changyanlong
+ * options
+ */
 static const OptionDef options[] = {
     CMDUTILS_COMMON_OPTIONS
     { "x", HAS_ARG, { .func_arg = opt_width }, "force displayed width", "width" },

@@ -60,6 +60,16 @@ static int decode_packet(const AVPacket *pkt)
                 const AVMotionVector *mvs = (const AVMotionVector *)sd->data;
                 for (i = 0; i < sd->size / sizeof(*mvs); i++) {
                     const AVMotionVector *mv = &mvs[i];
+                    /**
+                     * changyanlong
+                     * patch
+                     */
+
+                    // dont need show motionless vectors
+                    // because they're useless
+                    if (mv->src_x == mv->dst_x && mv->src_y == mv->dst_y) {
+                        continue;
+                    }
                     printf("%d,%2d,%2d,%2d,%4d,%4d,%4d,%4d,0x%"PRIx64"\n",
                         video_frame_count, mv->source,
                         mv->w, mv->h, mv->src_x, mv->src_y,

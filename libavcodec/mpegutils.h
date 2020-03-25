@@ -95,8 +95,10 @@
 #define IS_QUANT(a)      ((a) & MB_TYPE_QUANT)
 #define IS_DIR(a, part, list) ((a) & (MB_TYPE_P0L0 << ((part) + 2 * (list))))
 
-#define MB_SIZE_WIDTH(a)      (((a) & MB_TYPE_8x8) || ((a) & MB_TYPE_8x16)) ? 8 : 16
-#define MB_SIZE_HEIGHT(a)     (((a) & MB_TYPE_8x8) || ((a) & MB_TYPE_16x8)) ? 8 : 16
+//#define MB_SIZE_WIDTH(a)      (((a) & MB_TYPE_8x8) || ((a) & MB_TYPE_8x16)) ? 8 : 16
+//#define MB_SIZE_HEIGHT(a)     (((a) & MB_TYPE_8x8) || ((a) & MB_TYPE_16x8)) ? 8 : 16
+#define MB_SIZE_WIDTH(a)      (IS_8X8(a) || IS_8X16(a)) ? 8 : 16
+#define MB_SIZE_HEIGHT(a)     (IS_8X8(a) || IS_16X8(a)) ? 8 : 16
 
 // does this mb use listX, note does not work if subMBs
 #define USES_LIST(a, list) ((a) & ((MB_TYPE_P0L0 | MB_TYPE_P1L0) << (2 * (list))))

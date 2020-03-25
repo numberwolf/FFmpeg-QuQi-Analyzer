@@ -42,3 +42,6 @@ cmake-build-debug
 FATE_SAMPLES/
 *.crc
 *.mp4
+aa
+tmp
+extract_mvs
