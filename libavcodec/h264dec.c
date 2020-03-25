@@ -920,7 +920,7 @@ static int finalize_frame(H264Context *h, AVFrame *dst, H264Picture *out, int *g
         *got_frame = 1;
 
         if (CONFIG_MPEGVIDEO) {
-            printf("[CYL DEBUG : libavcodec/h264dec.c] ff_print_debug_info2\n");
+//            printf("[CYL DEBUG : libavcodec/h264dec.c] ff_print_debug_info2\n");
             ff_print_debug_info2(h->avctx, dst, NULL,
                                  out->mb_type,
                                  out->qscale_table,
@@ -1096,7 +1096,7 @@ static int h264_decode_frame(AVCodecContext *avctx, void *data,
 
                 //printf("[CYL DEBUG : libavcodec/h264dec.c QP data:]\n");
 
-                printf("[DEBUG] h->slice_ctx->mb_xy :%d\n", h->slice_ctx->mb_xy);
+//                printf("[DEBUG] h->slice_ctx->mb_xy :%d\n", h->slice_ctx->mb_xy);
 
                 for (int ind = 0; ind < h->mb_num; ind++) {
 //                    printf("%d ",h->slice_ctx[0].mb_xy);

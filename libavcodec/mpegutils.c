@@ -219,7 +219,7 @@ void ff_print_debug_info2(AVCodecContext *avctx, AVFrame *pict, uint8_t *mbskip_
         av_freep(&mvs);
     }
 
-    printf("===========end set mb==============\n");
+//    printf("===========end set mb==============\n");
 
     /* TODO: export all the following to make them accessible for users (and filters) */
     if (avctx->hwaccel || !mbtype_table)
@@ -301,7 +301,7 @@ void ff_print_debug_info2(AVCodecContext *avctx, AVFrame *pict, uint8_t *mbskip_
     }
 
 #if FF_API_DEBUG_MV
-    printf("=========== FF_API_DEBUG_MV ============\n");
+//    printf("=========== FF_API_DEBUG_MV ============\n");
     if ((avctx->debug & (FF_DEBUG_VIS_QP | FF_DEBUG_VIS_MB_TYPE)) ||
         (avctx->debug_mv)) {
         int mb_y;
@@ -429,5 +429,5 @@ void ff_print_debug_info2(AVCodecContext *avctx, AVFrame *pict, uint8_t *mbskip_
     }
 #endif
 
-    printf("==================end ff_print_debug_info2============\n");
+//    printf("==================end ff_print_debug_info2============\n");
 }
