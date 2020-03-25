@@ -1523,15 +1523,15 @@ enum AVFieldOrder {
  * analyze media codec encode info
  * block_type / QP / ...
  */
-typedef struct CYLCodecAnalyzerLinkListNode {
-//    signed char *qp_info;
-//    uint32_t *mb_type;cyl2analyzer.h
-    int mb_index;
-    signed char qp_item;
-    uint32_t mb_item_type;
-    const char *mb_desc;
-    struct CYLCodecAnalyzerLinkListNode *next;
-} CYLCodecAnalyzerLinkListNode;
+//typedef struct CYLCodecAnalyzerLinkListNode {
+////    signed char *qp_info;
+////    uint32_t *mb_type;cyl2analyzer.h
+//    int mb_index;
+//    signed char qp_item;
+//    uint32_t mb_item_type;
+//    const char *mb_desc;
+//    struct CYLCodecAnalyzerLinkListNode *next;
+//} CYLCodecAnalyzerLinkListNode;
 
 /**
  * main external API structure.
@@ -3337,7 +3337,7 @@ typedef struct AVCodecContext {
      * 1 open
      */
     int cyl_analyze_open;
-    CYLCodecAnalyzerLinkListNode *cyl_analyzer_head;
+//    CYLCodecAnalyzerLinkListNode *cyl_analyzer_head;
 
     /**参考帧列表
      * motion reference frame index

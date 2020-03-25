@@ -186,6 +186,11 @@ static void wipe_side_data(AVFrame *frame)
     av_freep(&frame->side_data);
 }
 
+/**
+ * changyanlong
+ * QUQI Modify
+ * @return
+ */
 AVFrame *av_frame_alloc(void)
 {
     AVFrame *frame = av_mallocz(sizeof(*frame));
@@ -193,6 +198,7 @@ AVFrame *av_frame_alloc(void)
     if (!frame)
         return NULL;
 
+    frame->cyl_analyzer_head = NULL; // QUQI
     frame->extended_data = NULL;
     get_frame_defaults(frame);
 
@@ -550,6 +556,37 @@ AVFrame *av_frame_clone(const AVFrame *src)
     return ret;
 }
 
+/**
+ * changyanlong
+ * @param cyl_analyzer_head
+ * @return
+ */
+int av_frame_cyl_analyzer_release(AVFrame *frame) {
+    if (frame->cyl_analyzer_head == NULL) {
+        return 0;
+    }
+
+    CYLCodecAnalyzerLinkListNode *ptr   = frame->cyl_analyzer_head;
+    CYLCodecAnalyzerLinkListNode *ptr2  = NULL;
+    while (ptr != NULL) {
+        ptr2 = ptr;
+        free(ptr2);
+        ptr2 = NULL;
+
+        if (ptr->next != NULL) {
+            ptr = ptr->next;
+        } else {
+            break;
+        }
+    }
+    return 0;
+}
+
+/**
+ * changyanlong
+ * QUQI
+ * @param frame
+ */
 void av_frame_unref(AVFrame *frame)
 {
     int i;
@@ -557,6 +594,7 @@ void av_frame_unref(AVFrame *frame)
     if (!frame)
         return;
 
+    av_frame_cyl_analyzer_release(frame);
     wipe_side_data(frame);
 
     for (i = 0; i < FF_ARRAY_ELEMS(frame->buf); i++)

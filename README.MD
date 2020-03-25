@@ -23,11 +23,11 @@ avctx->cyl_analyzer_state_switch(avctx,1);
 ...etc
 
 // decode
-int ret = avcodec_send_packet(avctx, avpkt);
+int ret = avcodec_receive_frame(avctx, v_frame);
 
 ... etc
 
-CYLCodecAnalyzerLinkListNode *ptr = avctx->cyl_analyzer_head;
+CYLCodecAnalyzerLinkListNode *ptr = v_frame->cyl_analyzer_head;
 
 while (ptr != NULL) {
     if (ptr->mb_index >= 0) {
@@ -55,11 +55,11 @@ avctx->cyl_analyzer_state_switch(avctx,1);
 ...etc
 
 // decode
-int ret = avcodec_send_packet(avctx, avpkt);
+int ret = avcodec_receive_frame(avctx, v_frame);
 
 ... etc
 
-CYLCodecAnalyzerLinkListNode *ptr = avctx->cyl_analyzer_head;
+CYLCodecAnalyzerLinkListNode *ptr = v_frame->cyl_analyzer_head;
 
 while (ptr != NULL) {
     if (ptr->mb_index >= 0) {

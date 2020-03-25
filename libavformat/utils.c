@@ -704,11 +704,11 @@ FF_ENABLE_DEPRECATION_WARNINGS
         // fctx->streams[video_stream]->codec
         if (s->streams[i]->codec->codec_type == AVMEDIA_TYPE_VIDEO) {
             s->streams[i]->codec->cyl_analyze_open  = -1;
-            s->streams[i]->codec->cyl_analyzer_head = NULL;
+//            s->streams[i]->codec->cyl_analyzer_head = NULL;
         } else {
             // 留着逻辑可能搞别的
             s->streams[i]->codec->cyl_analyze_open  = -1;
-            s->streams[i]->codec->cyl_analyzer_head = NULL;
+//            s->streams[i]->codec->cyl_analyzer_head = NULL;
         }
         s->streams[i]->codec->ref_index[0] = NULL;
         s->streams[i]->codec->ref_index[1] = NULL;

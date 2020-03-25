@@ -966,27 +966,27 @@ static int send_next_delayed_frame(H264Context *h, AVFrame *dst_frame,
     return buf_index;
 }
 
-/**
- * changyanlong
- * @param cyl_analyzer_head
- * @return
- */
-static int cyl_analyzer_release_link_list_node(CYLCodecAnalyzerLinkListNode *cyl_analyzer_head) {
-    CYLCodecAnalyzerLinkListNode *ptr   = cyl_analyzer_head;
-    CYLCodecAnalyzerLinkListNode *ptr2  = NULL;
-    while (ptr != NULL) {
-        ptr2 = ptr;
-        free(ptr2);
-        ptr2 = NULL;
-
-        if (ptr->next != NULL) {
-            ptr = ptr->next;
-        } else {
-            break;
-        }
-    }
-    return 0;
-}
+///**
+// * changyanlong
+// * @param cyl_analyzer_head
+// * @return
+// */
+//static int cyl_analyzer_release_link_list_node(AVFrame *cyl_analyzer_head) {
+//    CYLCodecAnalyzerLinkListNode *ptr   = cyl_analyzer_head;
+//    CYLCodecAnalyzerLinkListNode *ptr2  = NULL;
+//    while (ptr != NULL) {
+//        ptr2 = ptr;
+//        free(ptr2);
+//        ptr2 = NULL;
+//
+//        if (ptr->next != NULL) {
+//            ptr = ptr->next;
+//        } else {
+//            break;
+//        }
+//    }
+//    return 0;
+//}
 
 static int h264_decode_frame(AVCodecContext *avctx, void *data,
                              int *got_frame, AVPacket *avpkt)
@@ -1078,13 +1078,13 @@ static int h264_decode_frame(AVCodecContext *avctx, void *data,
                  * 1. macro block type
                  * 2. qp
                  */
-                if (avctx->cyl_analyzer_head != NULL) {
-                    cyl_analyzer_release_link_list_node(avctx->cyl_analyzer_head);
+                if (pict->cyl_analyzer_head != NULL) {
+                    av_frame_cyl_analyzer_release(pict->cyl_analyzer_head);
                 }
 
-                avctx->cyl_analyzer_head = (CYLCodecAnalyzerLinkListNode *)malloc(sizeof(CYLCodecAnalyzerLinkListNode));
+                pict->cyl_analyzer_head = (CYLCodecAnalyzerLinkListNode *)malloc(sizeof(CYLCodecAnalyzerLinkListNode));
 
-                CYLCodecAnalyzerLinkListNode *ptr = avctx->cyl_analyzer_head;
+                CYLCodecAnalyzerLinkListNode *ptr = pict->cyl_analyzer_head;
                 ptr->mb_index   = -1;
                 ptr->next       = NULL;
 

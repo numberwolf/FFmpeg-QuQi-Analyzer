@@ -195,6 +195,22 @@ typedef struct AVFrameSideData {
 } AVFrameSideData;
 
 /**
+ * Changyanlong
+ * Link List
+ * analyze media codec encode info
+ * block_type / QP / ...
+ */
+typedef struct CYLCodecAnalyzerLinkListNode {
+//    signed char *qp_info;
+//    uint32_t *mb_type;cyl2analyzer.h
+    int mb_index;
+    signed char qp_item;
+    uint32_t mb_item_type;
+    const char *mb_desc;
+    struct CYLCodecAnalyzerLinkListNode *next;
+} CYLCodecAnalyzerLinkListNode;
+
+/**
  * This structure describes decoded (raw) audio or video data.
  *
  * AVFrame must be allocated using av_frame_alloc(). Note that this only
@@ -603,6 +619,12 @@ typedef struct AVFrame {
      * for the target frame's private_ref field.
      */
     AVBufferRef *private_ref;
+
+    /**
+     * changyanlong
+     * VCL Info MBType/QP/...
+     */
+    CYLCodecAnalyzerLinkListNode *cyl_analyzer_head;
 } AVFrame;
 
 #if FF_API_FRAME_GET_SET
@@ -714,6 +736,13 @@ int av_frame_ref(AVFrame *dst, const AVFrame *src);
  * @return newly created AVFrame on success, NULL on error.
  */
 AVFrame *av_frame_clone(const AVFrame *src);
+
+/**
+ * changyanlong
+ * @param cyl_analyzer_head
+ * @return
+ */
+int av_frame_cyl_analyzer_release(AVFrame *frame);
 
 /**
  * Unreference all the buffers referenced by frame and reset the frame fields.
