@@ -535,6 +535,30 @@ int attribute_align_arg ff_codec_open2_recursive(AVCodecContext *avctx, const AV
     return ret;
 }
 
+/**
+ * changyanlong
+ */
+static int cyl_test(int num) {
+    printf("=======cyl test num is %d=======\n",num);
+    return 0;
+}
+
+/**
+ * changyanlong
+ * @param avctx
+ * @param is_open
+ * @return
+ */
+static int cyl_analyzer_state_switch(AVCodecContext *avctx, int is_open) {
+    avctx->cyl_analyze_open = is_open;
+    return 0;
+}
+
+/**
+ * changyanlong
+ * quqi
+ * 函数设置
+ */
 int attribute_align_arg avcodec_open2(AVCodecContext *avctx, const AVCodec *codec, AVDictionary **options)
 {
     int ret = 0;
@@ -1012,6 +1036,14 @@ end:
         *options = tmp;
     }
 
+    /*
+     * changyanlong
+     * quqi
+     */
+    avctx->cyl_analyze_open                 = -1;
+    avctx->cyl_test                         = cyl_test;
+    avctx->cyl_analyzer_state_switch        = cyl_analyzer_state_switch;
+
     return ret;
 free_and_end:
     if (avctx->codec &&
@@ -1084,6 +1116,7 @@ av_cold int avcodec_close(AVCodecContext *avctx)
      * release cyl_test ptr
      */
     avctx->cyl_test = NULL;
+    avctx->cyl_analyzer_state_switch = NULL;
 
     if (avcodec_is_open(avctx)) {
         FramePool *pool = avctx->internal->pool;

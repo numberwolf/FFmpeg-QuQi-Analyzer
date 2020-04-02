@@ -4,6 +4,14 @@
 
 <br><br>
 
+### 使用示例：
+```bash
+cd doc_quqi
+bash build.sh
+cd build
+./main ../veilside.h264
+```
+
 --------------------------------
 
 LICENSE: 
@@ -158,7 +166,8 @@ if (strcmp(ptr->mb_desc , CYL_ANALYZE_MB_TYPE_IS_INTER)) {
 AVDictionary *options = NULL;
 av_dict_set(&options, "flags2", "+export_mvs", 0);
 
-... avformat_open_input(&fctx ...
+avcodec_open2(rtspVideoCodecContext, rtspVideoCodec, &options);
+
 ... etc
 
 while (avcodec_receive_frame(rtspVideoCodecContext, v_frame) == 0) {
