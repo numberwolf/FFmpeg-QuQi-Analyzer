@@ -46,8 +46,10 @@ private:
     AVFormatContext *fctx   = nullptr;
     AVPacket *read_packet   = nullptr;
 
+    int audio_stream        = -1;
+
     // Audio
-//    AVFrame *v_frame            = nullptr;
+    AVFrame *a_frame            = nullptr;
     AVCodecContext *media_ctx   = nullptr;
     AVCodec *media_codec        = nullptr;
 
