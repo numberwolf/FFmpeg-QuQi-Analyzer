@@ -1056,7 +1056,7 @@ static int h264_decode_frame(AVCodecContext *avctx, void *data,
              * changyanlong
              * 如果开启了分析器
              */
-            printf("avctx->cyl_analyze_open = %d\n",avctx->cyl_analyze_open);
+//            printf("avctx->cyl_analyze_open = %d\n",avctx->cyl_analyze_open);
             if (avctx->cyl_analyze_open == 1) {
                 /**
                  * h -> H264SliceContext *slice_ctx;
