@@ -110,7 +110,7 @@ int FFmpegAnalyzer::get_frame() {
         std::cout << this->media_ctx->sample_rate << "," << this->read_packet->duration << std::endl;
         std::cout << this->media_ctx->frame_size << "," << this->media_ctx->frame_number << std::endl;
         // For audio, only linesize[0] may be set. For planar audio, each channel
-        std::cout << this->read_packet->data << std::endl;
+        std::cout << this->read_packet->size << std::endl;
     } else {
         av_packet_unref(this->read_packet);
         return -2;
