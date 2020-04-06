@@ -53,6 +53,8 @@ private:
     AVCodecContext *media_ctx   = nullptr;
     AVCodec *media_codec        = nullptr;
 
+    FILE *file_ptr = nullptr;
+
 public:
     explicit FFmpegAnalyzer();
     ~FFmpegAnalyzer();

@@ -1,6 +1,7 @@
 //
 // Created by 小老虎 on 2020/4/2.
 //
+#include <stdio.h>
 #include "ffmpeg_analyzer.h"
 
 FFmpegAnalyzer::FFmpegAnalyzer() {
@@ -10,6 +11,8 @@ FFmpegAnalyzer::~FFmpegAnalyzer() {
 }
 
 int FFmpegAnalyzer::open_aac_media(const char *p_media_path) {
+    this->file_ptr = fopen("./output.aac", "wb");
+
 //    this->fctx = avformat_alloc_context();
     int ret = avformat_open_input(&this->fctx, p_media_path, NULL, NULL); // &options
     this->fctx->probesize = 4096;
@@ -20,25 +23,25 @@ int FFmpegAnalyzer::open_aac_media(const char *p_media_path) {
 
     ret = avformat_find_stream_info(this->fctx,NULL);
     if(ret < 0) {
-        printf("can't find stream info ");
+//        printf("can't find stream info ");
         return -1;
     }
 
     for(int i=0; i<this->fctx->nb_streams; i++) {
         if (this->fctx->streams[i]->codec->codec_type == AVMEDIA_TYPE_VIDEO) {
-            std::cout << "v," << i << std::endl;
+//            std::cout << "v," << i << std::endl;
         } else if (this->fctx->streams[i]->codec->codec_type == AVMEDIA_TYPE_AUDIO) {
             this->audio_stream = i;
-            std::cout << "a:" << this->audio_stream << std::endl;
+//            std::cout << "a:" << this->audio_stream << std::endl;
         }
     }
 
     this->media_ctx     = this->fctx->streams[this->audio_stream]->codec;
     this->media_codec   = avcodec_find_decoder(this->media_ctx->codec_id);
 
-    std::cout << "acodec name:" << this->media_codec->name << std::endl;
-    std::cout << "acodec id:" << this->media_ctx->codec_id << std::endl;
-    std::cout << "aac id:" << AV_CODEC_ID_AAC << std::endl;
+//    std::cout << "acodec name:" << this->media_codec->name << std::endl;
+//    std::cout << "acodec id:" << this->media_ctx->codec_id << std::endl;
+//    std::cout << "aac id:" << AV_CODEC_ID_AAC << std::endl;
 
 
 
@@ -104,23 +107,29 @@ int FFmpegAnalyzer::get_frame() {
             if (!this->fctx || !this->a_frame) {
                 return -1;
             }
-            std::cout << "loop" << std::endl;
+//            std::cout << "loop" << std::endl;
         }
 
-        std::cout << this->media_ctx->sample_rate << "," << this->read_packet->duration << std::endl;
-        std::cout << this->media_ctx->frame_size << "," << this->media_ctx->frame_number << std::endl;
+//        std::cout << this->media_ctx->sample_rate << "," << this->read_packet->duration << std::endl;
+//        std::cout << this->media_ctx->frame_size << "," << this->media_ctx->frame_number << std::endl;
         // For audio, only linesize[0] may be set. For planar audio, each channel
         std::cout << this->read_packet->size << std::endl;
+        std::cout << "write result:" << fwrite(this->read_packet->data, sizeof(uint8_t), this->read_packet->size, this->file_ptr) << std::endl;
     } else {
         av_packet_unref(this->read_packet);
         return -2;
     }
+
 
     av_packet_unref(this->read_packet);
     return 0;
 }
 
 int FFmpegAnalyzer::close_media() {
+    if (file_ptr != nullptr) {
+        fclose(file_ptr);
+    }
+
     if (this->a_frame != nullptr) {
         av_frame_free(&this->a_frame);
         this->a_frame = nullptr;

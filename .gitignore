@@ -47,3 +47,4 @@ tmp
 extract_mvs
 doc_quqi/build
 doc_quqi/example_aac_packet/build
+*.aac
