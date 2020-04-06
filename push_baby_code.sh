@@ -16,12 +16,13 @@ defaultCommit=(
 "Random: two monkey on the tree~~~ coding bugs every day~~ so happy so happy~~"
 )
 defaultCommitLen=${#defaultCommit[@]}
+((defaultCommitLen=$defaultCommitLen-1))
 
 # Input
 commitVal=${1:-""}
 
 if [[ -z "${commitVal}" || "${commitVal}" == "" ]]; then
-    randIndex=`rand 1 ${defaultCommitLen}`
+    randIndex=`rand 0 ${defaultCommitLen}`
     commitVal=${defaultCommit[$randIndex]} # `date +"%Y/%m/%d %H:%M:%S"`
 fi
 
