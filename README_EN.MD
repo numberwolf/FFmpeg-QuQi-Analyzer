@@ -5,6 +5,7 @@
 <br><br>
 
 ### Example：
+Example in `doc_quqi`
 ```bash
 cd doc_quqi
 bash build.sh

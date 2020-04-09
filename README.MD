@@ -5,6 +5,7 @@
 <br><br>
 
 ### 使用示例：
+Example位于`doc_quqi`目录下
 ```bash
 cd doc_quqi
 bash build.sh
