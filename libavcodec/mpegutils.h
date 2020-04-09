@@ -95,6 +95,9 @@
 #define IS_QUANT(a)      ((a) & MB_TYPE_QUANT)
 #define IS_DIR(a, part, list) ((a) & (MB_TYPE_P0L0 << ((part) + 2 * (list))))
 
+/*
+ * changyanlong
+ */
 //#define MB_SIZE_WIDTH(a)      (((a) & MB_TYPE_8x8) || ((a) & MB_TYPE_8x16)) ? 8 : 16
 //#define MB_SIZE_HEIGHT(a)     (((a) & MB_TYPE_8x8) || ((a) & MB_TYPE_16x8)) ? 8 : 16
 #define MB_SIZE_WIDTH(a)      (IS_8X8(a) || IS_8X16(a)) ? 8 : 16

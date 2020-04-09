@@ -141,6 +141,10 @@ static void avformat_get_context_defaults(AVFormatContext *s)
     av_opt_set_defaults(s);
 }
 
+/**
+ * changyanlong
+ * @return
+ */
 AVFormatContext *avformat_alloc_context(void)
 {
     printf("- \n");
