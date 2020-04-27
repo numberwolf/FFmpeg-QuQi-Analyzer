@@ -145,6 +145,12 @@ OBJS-$(CONFIG_SINC_FILTER)                   += asrc_sinc.o
 OBJS-$(CONFIG_SINE_FILTER)                   += asrc_sine.o
 
 OBJS-$(CONFIG_ANULLSINK_FILTER)              += asink_anullsink.o
+#
+# @changyanlong
+# @quqi
+# filter add roi
+#
+#OBJS-$(CONFIG_ADDROI_FILTER)              	 += vf_addroi.o
 
 # video filters
 OBJS-$(CONFIG_ALPHAEXTRACT_FILTER)           += vf_extractplanes.o
