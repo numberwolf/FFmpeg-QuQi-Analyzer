@@ -1477,6 +1477,7 @@ static void stream_seek(VideoState *is, int64_t pos, int64_t rel, int seek_by_by
 {
     if (!is->seek_req) {
         is->seek_pos = pos;
+        printf("[quqi debug] seek_pos : %d\n", is->seek_pos);
         is->seek_rel = rel;
         is->seek_flags &= ~AVSEEK_FLAG_BYTE;
         if (seek_by_bytes)
@@ -2839,6 +2840,7 @@ static int read_thread(void *arg)
         int64_t timestamp;
 
         timestamp = start_time;
+        printf("[quqi debug] timestamp = start_time = %d\n", start_time);
         /* add the stream start time */
         if (ic->start_time != AV_NOPTS_VALUE)
             timestamp += ic->start_time;
@@ -3515,6 +3517,7 @@ static int opt_sync(void *optctx, const char *opt, const char *arg)
 
 static int opt_seek(void *optctx, const char *opt, const char *arg)
 {
+    printf("[quqi debug] opt_seek(...) arg: %s\n", arg);
     start_time = parse_time_or_die(opt, arg, 1);
     return 0;
 }

@@ -19,6 +19,7 @@
  */
 
 #include <stdint.h>
+#include <math.h>
 
 #include "libavutil/common.h"
 #include "libavutil/frame.h"
@@ -28,6 +29,8 @@
 
 #include "avcodec.h"
 #include "mpegutils.h"
+
+#define ADD_MB_DEBUG_STATE 0
 
 /**
  * changyanlong
@@ -45,14 +48,29 @@
 static int add_mb(AVMotionVector *mb, uint32_t mb_type,
                   int dst_x, int dst_y,
                   int motion_x, int motion_y, int motion_scale,
-                  int direction)
+                  int direction, int debug)
 {
+
+    int motion_distance_x = motion_x / motion_scale;
+    int motion_distance_y = motion_y / motion_scale;
+
+    if (debug == 1) {
+        int mv_distance = floor(
+                sqrt(
+                        motion_distance_x * motion_distance_x + motion_distance_y * motion_distance_y
+                )
+        );
+        if (mv_distance < 10) { //  || mv_distance > 100
+            return 0;
+        }
+    }
+
     /** changyanlong
      * 新增逻辑 判断是否无位移
      * check no mv info and remove it
      */
-    int src_x = dst_x + motion_x / motion_scale;
-    int src_y = dst_y + motion_y / motion_scale;
+    int src_x = dst_x + motion_distance_x;
+    int src_y = dst_y + motion_distance_y;
 
     if (src_x == dst_x && src_y == dst_y) {
 //        printf("[code 100001 mpegutils.c add_mb(xxx) Filter none-move mv data]\n");
@@ -164,7 +182,7 @@ void ff_print_debug_info2(AVCodecContext *avctx, AVFrame *pict, uint8_t *mbskip_
                                       (mb_y * 2 + (i >> 1)) * mv_stride) << (mv_sample_log2 - 1);
                             int mx = motion_val[direction][xy][0];
                             int my = motion_val[direction][xy][1];
-                            mbcount += add_mb(mvs + mbcount, mb_type, sx, sy, mx, my, scale, direction);
+                            mbcount += add_mb(mvs + mbcount, mb_type, sx, sy, mx, my, scale, direction, ADD_MB_DEBUG_STATE);
                         }
                     } else if (IS_16X8(mb_type)) {
                         for (i = 0; i < 2; i++) {
@@ -177,7 +195,7 @@ void ff_print_debug_info2(AVCodecContext *avctx, AVFrame *pict, uint8_t *mbskip_
                             if (IS_INTERLACED(mb_type))
                                 my *= 2;
 
-                            mbcount += add_mb(mvs + mbcount, mb_type, sx, sy, mx, my, scale, direction);
+                            mbcount += add_mb(mvs + mbcount, mb_type, sx, sy, mx, my, scale, direction, ADD_MB_DEBUG_STATE);
                         }
                     } else if (IS_8X16(mb_type)) {
                         for (i = 0; i < 2; i++) {
@@ -190,7 +208,7 @@ void ff_print_debug_info2(AVCodecContext *avctx, AVFrame *pict, uint8_t *mbskip_
                             if (IS_INTERLACED(mb_type))
                                 my *= 2;
 
-                            mbcount += add_mb(mvs + mbcount, mb_type, sx, sy, mx, my, scale, direction);
+                            mbcount += add_mb(mvs + mbcount, mb_type, sx, sy, mx, my, scale, direction, ADD_MB_DEBUG_STATE);
                         }
                     } else {
                           int sx = mb_x * 16 + 8;
@@ -198,7 +216,7 @@ void ff_print_debug_info2(AVCodecContext *avctx, AVFrame *pict, uint8_t *mbskip_
                           int xy = (mb_x + mb_y * mv_stride) << mv_sample_log2;
                           int mx = motion_val[direction][xy][0];
                           int my = motion_val[direction][xy][1];
-                          mbcount += add_mb(mvs + mbcount, mb_type, sx, sy, mx, my, scale, direction);
+                          mbcount += add_mb(mvs + mbcount, mb_type, sx, sy, mx, my, scale, direction, ADD_MB_DEBUG_STATE);
                     }
                 }
             }
@@ -219,7 +237,7 @@ void ff_print_debug_info2(AVCodecContext *avctx, AVFrame *pict, uint8_t *mbskip_
         av_freep(&mvs);
     }
 
-//    printf("===========end set mb==============\n");
+//    printf("===========end set mb mv==============\n");
 
     /* TODO: export all the following to make them accessible for users (and filters) */
     if (avctx->hwaccel || !mbtype_table)
