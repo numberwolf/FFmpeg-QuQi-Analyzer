@@ -78,6 +78,11 @@
 #define IS_BLA(s) ((s)->nal_unit_type == HEVC_NAL_BLA_W_RADL || (s)->nal_unit_type == HEVC_NAL_BLA_W_LP || \
                    (s)->nal_unit_type == HEVC_NAL_BLA_N_LP)
 #define IS_IRAP(s) ((s)->nal_unit_type >= 16 && (s)->nal_unit_type <= 23)
+/**
+ * @changyanlong
+ * quqi
+ * Check Key frame
+ */
 
 enum RPSType {
     ST_CURR_BEF = 0,
